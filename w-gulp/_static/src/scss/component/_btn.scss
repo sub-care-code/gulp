@@ -1,0 +1,143 @@
+@use "../global" as *;
+
+.lead-btn {
+  position: relative;
+  text-align: center;
+}
+
+/*==================================================
+機能編 線から塗に変化（上から下）
+===================================*/
+
+/* ボタン共通設定 */
+.btn__anima {
+  /*線の基点とするためrelativeを指定*/
+  position: relative;
+  /*ボタンの形状*/
+  display: inline-block;
+  padding: 1.4rem 4rem;
+  color: #333;
+  border: 1px solid $color-orange;
+  background-color: $color-sub-orange;
+  border-radius: 8px;
+  outline: none;
+  /*はみ出す背景色を隠す*/
+  overflow: hidden;
+  z-index: 2;
+  &:hover {
+    color: $color-white;
+    border-color: transparent;
+    /*色の変化を遅らせる*/
+    transition-delay: 0.6s;
+  }
+  span {
+    display: block;
+    z-index: 2;
+  }
+}
+.bordertop {
+  span {
+    &::after,
+    &::before {
+      content: "";
+      /*絶対配置で線の位置を決める*/
+      position: absolute;
+      width: 1px;
+      height: 0;
+      /*線の形状*/
+      background: $color-orange;
+      /*アニメーションの設定*/
+      transition: all 0.3s;
+    }
+    &::before {
+      left: 0;
+      top: 0;
+    }
+    &::after {
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+/*hoverをすると線が伸びる*/
+.bordertop:hover span::before,
+.bordertop:hover span::after {
+  height: 100%;
+}
+
+/*背景の設定*/
+.bordertop::before {
+  content: "";
+  /*絶対配置で線の位置を決める*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  /*背景の形状*/
+  width: 100%;
+  height: 0;
+  background: $color-orange;
+  /*アニメーションの設定*/
+  transition: all 0.3s;
+}
+
+/*hoverをすると背景が伸びる*/
+.bordertop:hover::before {
+  height: 100%;
+  /*0.4秒遅れてアニメーション*/
+  transition-delay: 0.4s;
+}
+
+//インスタボタンレイアウト
+.insta__wrap {
+  text-align: center;
+}
+/* ボタン全体 */
+.flowbtn {
+  border-radius: 4px;
+  padding: 0.6rem;
+  position: relative;
+  display: inline-block;
+  width: 50vw;
+  max-width: 350px;
+  font-size: 2rem;
+  color: #fff !important;
+  margin-bottom: 5px;
+}
+/* Instagramアイコン位置 */
+.insta_btn .fa-instagram {
+  position: relative;
+  z-index: 1;
+}
+/* Instagram紫グラデ背景色 */
+.insta_btn {
+  background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: -75px;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      #ffdb2c 5%,
+      rgba(255, 105, 34, 0.65) 55%,
+      rgba(255, 88, 96, 0) 80%
+    );
+  }
+  span {
+    font-size: 14px;
+    position: relative;
+    left: 8px;
+    bottom: 2px;
+    transition: 0.6s;
+    display: inline-block;
+  }
+  &:hover span {
+    transform: rotateX(360deg);
+    opacity: 0.6;
+    transition: 0.6s;
+  }
+}
